@@ -22,14 +22,14 @@ public class TopicService {
 	public List<Topic> getAllTopics(){
 		//return topics;
 		List<Topic> topics = new ArrayList<>();
-		topicrepository.findAll()
-		.forEach(topics :: add);
+		topics = (List<Topic>) topicrepository.findAll();
 		return topics;
 	}
 	
 	public Topic getTopic(String id)
 	{
-		return topics.stream().filter(t -> t.getId().equals(id)).findFirst().get();
+		//return topics.stream().filter(t -> t.getId().equals(id)).findFirst().get();
+		return topicrepository.findOne(id);
 	}
 
 	public void addTopic(Topic topic) {
@@ -39,18 +39,19 @@ public class TopicService {
 
 	public void updateTopic(String id, Topic topic) {
 		
-		for(int i=0; i < topics.size(); i++ ) {
-			Topic t = topics.get(i);
-			if(t.getId().equals(id)) {
-				topics.set(i,topic);
-				return; 
-			}
-		}
-		
+		topicrepository.save(topic);
+//		for(int i=0; i < topics.size(); i++ ) {
+//			Topic t = topics.get(i);
+//			if(t.getId().equals(id)) {
+//				topics.set(i,topic);
+//				return; 
+//			}
+//		}
+//		
 	}
 
 	public void deleteTopic(String id) {
-		topics.removeIf(t->t.getId().equals(id));
-		
+		//topics.removeIf(t->t.getId().equals(id));
+		topicrepository.delete(id);
 	}
 }
