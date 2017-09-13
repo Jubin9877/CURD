@@ -1,6 +1,7 @@
-package com.example.CURD.TopicController.course;
+package com.example.CURD.course;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,17 @@ public class CourseService {
 	@Autowired
 	private CourseRepository courseRepository;
 
+//	private List<Course> topics = new ArrayList<>(Arrays.asList(
+//			new Course("spring","Spring Framework","Spring Freamework Description"),
+//			new Course("java","java","java Description"),
+//			new Course("Javascript","Javascript","Javascript Description")
+//			));
+	
 	public List<Course> getAllCourses(String topicId){
 		//return topics;
 		List<Course> courses = new ArrayList<>();
-		courses = courseRepository.findByTopicId(topicId);
+		courseRepository.findByTopicId(topicId)
+		.forEach(courses :: add);
 		return courses;
 	}
 	
@@ -30,7 +38,7 @@ public class CourseService {
 		
 	}
 
-	public void updateCourse( Course course) {
+	public void updateCourse(Course course) {
 		
 		courseRepository.save(course);
 //		for(int i=0; i < topics.size(); i++ ) {

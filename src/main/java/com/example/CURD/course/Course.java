@@ -1,4 +1,4 @@
-package com.example.CURD.TopicController.course;
+package com.example.CURD.course;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +13,6 @@ public class Course {
 	private String id;
 	private String name;
 	private String description;
-	
 	@ManyToOne
 	private Topic topic;
 	
